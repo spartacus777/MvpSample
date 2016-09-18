@@ -1,15 +1,24 @@
 package kizema.anton.podcastmvpsample.podcast_act;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import kizema.anton.podcastmvpsample.R;
+import kizema.anton.podcastmvpsample.adapters.MainAdapter;
+import kizema.anton.podcastmvpsample.model.PodactDtoList;
 
 public class PodcastListActivity extends AppCompatActivity implements PodactView{
 
-//    @BindView(R.id.rvPodcasts)
+    @BindView(R.id.rvPodcasts)
     public RecyclerView rvPodcasts;
+
+    private MainAdapter adapter;
 
     private PodcastPrsenter podcastPrsenter;
 
@@ -17,11 +26,23 @@ public class PodcastListActivity extends AppCompatActivity implements PodactView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        ButterKnife.bind(this);
+        ButterKnife.bind(this);
+
+        init();
 
         podcastPrsenter = new PodcastPresenterImpl(this, new PodcastInteractorImpl());
-
         podcastPrsenter.getPodcasts();
+    }
+
+    private void init(){
+        rvPodcasts.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }
+
+    @Override
+    public void setData(List<PodactDtoList.PodactDto> list) {
+        adapter = new MainAdapter(list);
+        rvPodcasts.setAdapter(adapter);
+    }
+
 }

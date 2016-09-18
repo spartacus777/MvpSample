@@ -1,7 +1,11 @@
 package kizema.anton.podcastmvpsample.podcast_act;
 
-/**
- * Created by somename on 14.09.2016.
- */
+import java.util.List;
+
+import kizema.anton.podcastmvpsample.model.PodactDtoList;
+
 public interface PodactView {
+
+    void setData(List<PodactDtoList.PodactDto> list);
+
 }

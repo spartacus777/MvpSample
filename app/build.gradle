@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'android-apt'
+apply plugin: 'android-apt'
 apply plugin: 'com.getkeepsafe.dexcount'
 
 def final RECYCLER_VIEW_VER = '22.0.0'
@@ -36,8 +36,8 @@ android {
 
 dependencies {
     //butterknife
-//    compile 'com.jakewharton:butterknife:8.4.0'
-//    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'

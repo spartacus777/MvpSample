@@ -1,4 +1,4 @@
-package kizema.anton.podcastmvpsample.podcast_act;
+package kizema.anton.podcastmvpsample.api;
 
 import kizema.anton.podcastmvpsample.model.PodactDtoList;
 import retrofit2.Call;
