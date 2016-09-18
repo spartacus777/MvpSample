@@ -30,8 +30,20 @@ public class PodcastListActivity extends AppCompatActivity implements PodactView
 
         init();
 
-        podcastPrsenter = new PodcastPresenterImpl(this, new PodcastInteractorImpl());
+        if (savedInstanceState != null){
+            podcastPrsenter = (PodcastPrsenter) savedInstanceState.getSerializable("e");
+            podcastPrsenter.setPodactView(this);
+        } else {
+            podcastPrsenter = new PodcastPresenterImpl(this, new PodcastInteractorImpl());
+        }
+
         podcastPrsenter.getPodcasts();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable("e", podcastPrsenter);
+        super.onSaveInstanceState(outState);
     }
 
     private void init(){

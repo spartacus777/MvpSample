@@ -1,5 +1,6 @@
 package kizema.anton.podcastmvpsample.podcast_act;
 
+import android.os.Handler;
 import android.util.Log;
 
 import kizema.anton.podcastmvpsample.api.ApiEndpoint;
@@ -24,15 +25,25 @@ public class PodcastInteractorImpl implements PodcastInteractor {
     @Override
     public void loadData(final OnCompletion listener) {
 
+        Log.e("RRR", " ===== LOAD DATA ===== ");
+
+
         ApiEndpoint apiService =
                 retrofit.create(ApiEndpoint.class);
 
         Call<PodactDtoList> call = apiService.listRepos();
         call.enqueue(new Callback<PodactDtoList>() {
             @Override
-            public void onResponse(Call<PodactDtoList> call, Response<PodactDtoList> response) {
+            public void onResponse(Call<PodactDtoList> call, final Response<PodactDtoList> response) {
 
-                listener.onComplete(response.body().getPodcasts());
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.onComplete(response.body().getPodcasts());
+                    }
+                }, 2000);
+
+
 
                 for (PodactDtoList.PodactDto p : response.body().getPodcasts()){
                     Log.d("RR", p.toString());
