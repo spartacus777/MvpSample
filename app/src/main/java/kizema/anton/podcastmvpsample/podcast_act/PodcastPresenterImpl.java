@@ -2,7 +2,7 @@ package kizema.anton.podcastmvpsample.podcast_act;
 
 import java.util.List;
 
-import kizema.anton.podcastmvpsample.model.PodactDtoList;
+import kizema.anton.podcastmvpsample.model.StationModel;
 
 public class PodcastPresenterImpl implements PodcastPrsenter {
 
@@ -10,20 +10,40 @@ public class PodcastPresenterImpl implements PodcastPrsenter {
 
     private PodcastInteractor podcastInteractor;
 
-    public PodcastPresenterImpl(PodactView podactView, PodcastInteractor podcastInteractor) {
-        this.podactView = podactView;
+    private boolean loadDataIsInProgress = false;
+    private boolean firstTime = true;
+
+
+    public PodcastPresenterImpl(PodcastInteractor podcastInteractor) {
         this.podcastInteractor = podcastInteractor;
     }
 
     @Override
-    public void setPodactView(PodactView podactView) {
+    public void setView(PodactView podactView) {
         this.podactView = podactView;
+
+        loadFromDB();
+
+        if (firstTime){
+            load();
+            firstTime = false;
+        }
     }
 
-    private boolean loadDataIsInProgress = false;
+    @Override
+    public void removeView(PodactView podactView) {
+        if (podactView == this.podactView){
+            this.podactView = null;
+        }
+    }
+
+    public void loadFromDB(){
+        List<StationModel> list = podcastInteractor.loadDataFromDB();
+        podactView.setData(list);
+    }
 
     @Override
-    public void getPodcasts() {
+    public void load() {
 
         if (loadDataIsInProgress){
             return;
@@ -32,7 +52,7 @@ public class PodcastPresenterImpl implements PodcastPrsenter {
         loadDataIsInProgress = true;
         podcastInteractor.loadData(new PodcastInteractor.OnCompletion() {
             @Override
-            public void onComplete(List<PodactDtoList.PodactDto> list) {
+            public void onComplete(List<StationModel> list) {
                 podactView.setData(list);
                 loadDataIsInProgress = false;
             }

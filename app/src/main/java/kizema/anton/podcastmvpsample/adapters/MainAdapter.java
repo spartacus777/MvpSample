@@ -9,13 +9,21 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import kizema.anton.podcastmvpsample.model.PodactDtoList;
+import kizema.anton.podcastmvpsample.model.StationModel;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder> {
 
-    private List<PodactDtoList.PodactDto> busModels;
+    private List<StationModel> busModels;
 
-    public MainAdapter(List<PodactDtoList.PodactDto> busModels) {
+    public MainAdapter(List<StationModel> busModels) {
+        this.busModels = busModels;
+        notifyDataSetChanged();
+    }
+
+
+    public MainAdapter() {}
+
+    public void setData(List<StationModel> busModels){
         this.busModels = busModels;
         notifyDataSetChanged();
     }
@@ -48,7 +56,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     @Override
     public void onBindViewHolder(final BaseViewHolder holder, final int position) {
 
-        PodactDtoList.PodactDto model = busModels.get(position);
+        StationModel model = busModels.get(position);
         holder.tvTitle.setText(model.getTitle());
     }
 

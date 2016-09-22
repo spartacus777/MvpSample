@@ -3,8 +3,11 @@ package kizema.anton.podcastmvpsample.podcast_act;
 import android.os.Handler;
 import android.util.Log;
 
+import java.util.List;
+
 import kizema.anton.podcastmvpsample.api.ApiEndpoint;
-import kizema.anton.podcastmvpsample.model.PodactDtoList;
+import kizema.anton.podcastmvpsample.model.StationModel;
+import kizema.anton.podcastmvpsample.model.StationModelList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,6 +25,8 @@ public class PodcastInteractorImpl implements PodcastInteractor {
                 .build();
     }
 
+
+
     @Override
     public void loadData(final OnCompletion listener) {
 
@@ -31,31 +36,37 @@ public class PodcastInteractorImpl implements PodcastInteractor {
         ApiEndpoint apiService =
                 retrofit.create(ApiEndpoint.class);
 
-        Call<PodactDtoList> call = apiService.listRepos();
-        call.enqueue(new Callback<PodactDtoList>() {
+        Call<StationModelList> call = apiService.listRepos();
+        call.enqueue(new Callback<StationModelList>() {
             @Override
-            public void onResponse(Call<PodactDtoList> call, final Response<PodactDtoList> response) {
+            public void onResponse(Call<StationModelList> call, final Response<StationModelList> response) {
+
+                for (StationModel p : response.body().getPodcasts()){
+                    p.save();
+                    Log.d("RR", p.toString());
+                }
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         listener.onComplete(response.body().getPodcasts());
+                        Log.d("RRR", "Loaded");
                     }
                 }, 2000);
 
-
-
-                for (PodactDtoList.PodactDto p : response.body().getPodcasts()){
-                    Log.d("RR", p.toString());
-                }
             }
 
             @Override
-            public void onFailure(Call<PodactDtoList> call, Throwable t) {
+            public void onFailure(Call<StationModelList> call, Throwable t) {
                 Log.d("RR", t + call.toString());
 
                 listener.onError();
             }
         });
+    }
+
+    @Override
+    public List<StationModel> loadDataFromDB() {
+        return StationModel.getAll();
     }
 }

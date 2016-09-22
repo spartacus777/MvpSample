@@ -5,7 +5,9 @@ import java.io.Serializable;
 
 public interface PodcastPrsenter extends Serializable{
 
-    void getPodcasts();
+    void load();
 
-    void setPodactView(PodactView podactView);
+    void setView(PodactView podactView);
+
+    void removeView(PodactView podactView);
 }

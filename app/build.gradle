@@ -18,7 +18,6 @@ dexcount {
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
-
     defaultConfig {
         applicationId "kizema.anton.podcastmvpsample"
         minSdkVersion 15
@@ -32,30 +31,38 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        flavor21 {
+            minSdkVersion 21
+            targetSdkVersion 23
+        }
+
+        defConfig {
+            minSdkVersion 15
+            targetSdkVersion 22
+        }
+    }
 }
 
 dependencies {
     //butterknife
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
-
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:22.2.1'
-
-    compile ("com.android.support:recyclerview-v7:${RECYCLER_VIEW_VER}")
-
-
-
+    compile "com.android.support:recyclerview-v7:${RECYCLER_VIEW_VER}"
     //leak kanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
-
     //retrofit
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta1'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-//    compile 'com.squareup.retrofit2:converter-simplexml:2.1.0'
+    //    compile 'com.squareup.retrofit2:converter-simplexml:2.1.0'
+
+    //activeandroid
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
 
 }

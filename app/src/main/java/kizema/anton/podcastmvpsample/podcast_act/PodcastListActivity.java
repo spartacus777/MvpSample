@@ -11,9 +11,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import kizema.anton.podcastmvpsample.R;
 import kizema.anton.podcastmvpsample.adapters.MainAdapter;
-import kizema.anton.podcastmvpsample.model.PodactDtoList;
+import kizema.anton.podcastmvpsample.model.StationModel;
 
-public class PodcastListActivity extends AppCompatActivity implements PodactView{
+public class PodcastListActivity extends AppCompatActivity implements PodactView {
 
     @BindView(R.id.rvPodcasts)
     public RecyclerView rvPodcasts;
@@ -29,15 +29,14 @@ public class PodcastListActivity extends AppCompatActivity implements PodactView
         ButterKnife.bind(this);
 
         init();
+        initPresenter(savedInstanceState);
+    }
 
-        if (savedInstanceState != null){
-            podcastPrsenter = (PodcastPrsenter) savedInstanceState.getSerializable("e");
-            podcastPrsenter.setPodactView(this);
-        } else {
-            podcastPrsenter = new PodcastPresenterImpl(this, new PodcastInteractorImpl());
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-        podcastPrsenter.getPodcasts();
+        podcastPrsenter.removeView(this);
     }
 
     @Override
@@ -46,15 +45,25 @@ public class PodcastListActivity extends AppCompatActivity implements PodactView
         super.onSaveInstanceState(outState);
     }
 
-    private void init(){
+    private void init() {
         rvPodcasts.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        adapter = new MainAdapter();
+        rvPodcasts.setAdapter(adapter);
+    }
 
+    private void initPresenter(Bundle savedInstanceState){
+        if (savedInstanceState != null) {
+            podcastPrsenter = (PodcastPrsenter) savedInstanceState.getSerializable("e");
+        } else {
+            podcastPrsenter = new PodcastPresenterImpl(new PodcastInteractorImpl());
+        }
+
+        podcastPrsenter.setView(this);
     }
 
     @Override
-    public void setData(List<PodactDtoList.PodactDto> list) {
-        adapter = new MainAdapter(list);
-        rvPodcasts.setAdapter(adapter);
+    public void setData(List<StationModel> list) {
+        adapter.setData(list);
     }
 
 }
