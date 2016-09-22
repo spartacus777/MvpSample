@@ -14,16 +14,19 @@
         android:theme="@style/AppTheme">
 
         <meta-data android:name="AA_DB_NAME" android:value="Demo.db" />
-        <meta-data android:name="AA_DB_VERSION" android:value="5" />
+        <meta-data android:name="AA_DB_VERSION" android:value="1" />
 
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="${applicationId}.model.StationModel"/>
 
         <activity android:name="kizema.anton.mvpsample.activities.stations.StationsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
