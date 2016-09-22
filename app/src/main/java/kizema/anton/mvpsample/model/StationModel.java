@@ -15,35 +15,35 @@ public class StationModel extends Model{
     public static final String TITLE = "title";
     public static final String DESCR = "description";
 
-    @SerializedName("display_name")
-    @Column(name = TITLE, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    private String title;
-
     @SerializedName("id")
-    @Column(name = DESCR)
-    private int description;
+    @Column(name = DESCR, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    private int stationId;
+
+    @SerializedName("display_name")
+    @Column(name = TITLE)
+    private String title;
 
     public String getTitle() {
         return title;
     }
 
-    public int getDescription() {
-        return description;
+    public int getStationId() {
+        return stationId;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setDescription(int description) {
-        this.description = description;
+    public void setStationId(int stationId) {
+        this.stationId = stationId;
     }
 
     @Override
     public String toString(){
         StringBuilder builder =  new StringBuilder();
         builder.append("title").append(" : ").append(title).append("\n")
-                .append("descr : ").append(description).append("\n");
+                .append("id : ").append(stationId).append("\n");
 
         return builder.toString();
     }
