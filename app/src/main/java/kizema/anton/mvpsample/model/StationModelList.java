@@ -1,4 +1,4 @@
-package kizema.anton.podcastmvpsample.model;
+package kizema.anton.mvpsample.model;
 
 
 import com.activeandroid.ActiveAndroid;

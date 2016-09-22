@@ -1,13 +1,13 @@
-package kizema.anton.podcastmvpsample.activities.stations;
+package kizema.anton.mvpsample.activities.stations;
 
 import android.os.Handler;
 import android.util.Log;
 
 import java.util.List;
 
-import kizema.anton.podcastmvpsample.api.ApiEndpoint;
-import kizema.anton.podcastmvpsample.model.StationModel;
-import kizema.anton.podcastmvpsample.model.StationModelList;
+import kizema.anton.mvpsample.api.ApiEndpoint;
+import kizema.anton.mvpsample.model.StationModel;
+import kizema.anton.mvpsample.model.StationModelList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

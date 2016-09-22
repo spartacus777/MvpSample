@@ -1,8 +1,8 @@
-package kizema.anton.podcastmvpsample.activities.stations;
+package kizema.anton.mvpsample.activities.stations;
 
 import java.util.List;
 
-import kizema.anton.podcastmvpsample.model.StationModel;
+import kizema.anton.mvpsample.model.StationModel;
 
 public class StationsPresenterImpl implements StationsPresenter {
 

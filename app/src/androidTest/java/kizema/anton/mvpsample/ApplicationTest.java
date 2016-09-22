@@ -1,4 +1,4 @@
-package kizema.anton.podcastmvpsample;
+package kizema.anton.mvpsample;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

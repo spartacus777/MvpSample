@@ -1,4 +1,4 @@
-package kizema.anton.podcastmvpsample.activities.stations;
+package kizema.anton.mvpsample.activities.stations;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +12,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import kizema.anton.podcastmvpsample.R;
-import kizema.anton.podcastmvpsample.adapters.MainAdapter;
-import kizema.anton.podcastmvpsample.model.StationModel;
+import kizema.anton.mvpsample.R;
+import kizema.anton.mvpsample.adapters.MainAdapter;
+import kizema.anton.mvpsample.model.StationModel;
 
 public class StationsListActivity extends AppCompatActivity implements StationsView {
 

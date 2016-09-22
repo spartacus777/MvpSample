@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kizema.anton.podcastmvpsample">
+    package="kizema.anton.mvpsample">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
 
     <application
         android:allowBackup="true"
-        android:name=".App"
+        android:name="kizema.anton.mvpsample.App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -17,7 +17,7 @@
         <meta-data android:name="AA_DB_VERSION" android:value="5" />
 
 
-        <activity android:name=".activities.stations.StationsListActivity">
+        <activity android:name="kizema.anton.mvpsample.activities.stations.StationsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

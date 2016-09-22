@@ -1,6 +1,6 @@
-package kizema.anton.podcastmvpsample.api;
+package kizema.anton.mvpsample.api;
 
-import kizema.anton.podcastmvpsample.model.StationModelList;
+import kizema.anton.mvpsample.model.StationModelList;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

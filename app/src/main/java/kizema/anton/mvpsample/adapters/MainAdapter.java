@@ -1,4 +1,4 @@
-package kizema.anton.podcastmvpsample.adapters;
+package kizema.anton.mvpsample.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import kizema.anton.podcastmvpsample.model.StationModel;
+import kizema.anton.mvpsample.model.StationModel;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder> {
 

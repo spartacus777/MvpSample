@@ -1,4 +1,4 @@
-package kizema.anton.podcastmvpsample.activities.stations;
+package kizema.anton.mvpsample.activities.stations;
 
 
 import java.io.Serializable;
