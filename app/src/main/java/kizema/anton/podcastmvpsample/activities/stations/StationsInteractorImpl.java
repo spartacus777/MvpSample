@@ -1,4 +1,4 @@
-package kizema.anton.podcastmvpsample.podcast_act;
+package kizema.anton.podcastmvpsample.activities.stations;
 
 import android.os.Handler;
 import android.util.Log;
@@ -14,41 +14,39 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class PodcastInteractorImpl implements PodcastInteractor {
+public class StationsInteractorImpl implements StationsInteractor {
 
     private Retrofit retrofit;
 
-    public PodcastInteractorImpl(){
+    private ApiEndpoint apiService;
+
+    public StationsInteractorImpl(){
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://api.metro.net")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+        apiService = retrofit.create(ApiEndpoint.class);
     }
-
-
 
     @Override
     public void loadData(final OnCompletion listener) {
 
         Log.e("RRR", " ===== LOAD DATA ===== ");
 
-
-        ApiEndpoint apiService =
-                retrofit.create(ApiEndpoint.class);
-
         Call<StationModelList> call = apiService.listRepos();
         call.enqueue(new Callback<StationModelList>() {
             @Override
             public void onResponse(Call<StationModelList> call, final Response<StationModelList> response) {
 
-                for (StationModel p : response.body().getPodcasts()){
-                    p.save();
-                    Log.d("RR", p.toString());
-                }
-
+                /**
+                 * TODO remove - emulating long-timed job
+                 */
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        response.body().save();
                         listener.onComplete(response.body().getPodcasts());
                         Log.d("RRR", "Loaded");
                     }

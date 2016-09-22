@@ -1,11 +1,13 @@
-package kizema.anton.podcastmvpsample.podcast_act;
+package kizema.anton.podcastmvpsample.activities.stations;
 
 import java.util.List;
 
 import kizema.anton.podcastmvpsample.model.StationModel;
 
-public interface PodactView {
+public interface StationsView {
 
     void setData(List<StationModel> list);
+
+    void showError();
 
 }

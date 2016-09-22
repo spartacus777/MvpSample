@@ -17,7 +17,7 @@
         <meta-data android:name="AA_DB_VERSION" android:value="5" />
 
 
-        <activity android:name=".podcast_act.PodcastListActivity">
+        <activity android:name=".activities.stations.StationsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

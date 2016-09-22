@@ -12,13 +12,16 @@ import java.util.List;
 @Table(name = "StationModel")
 public class StationModel extends Model{
 
+    public static final String TITLE = "title";
+    public static final String DESCR = "description";
+
     @SerializedName("display_name")
-    @Column(name = "title", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    public String title;
+    @Column(name = TITLE, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    private String title;
 
     @SerializedName("id")
-    @Column(name = "description")
-    public int description;
+    @Column(name = DESCR)
+    private int description;
 
     public String getTitle() {
         return title;

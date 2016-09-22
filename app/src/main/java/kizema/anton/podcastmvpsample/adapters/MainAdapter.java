@@ -13,10 +13,10 @@ import kizema.anton.podcastmvpsample.model.StationModel;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder> {
 
-    private List<StationModel> busModels;
+    private List<StationModel> stationList;
 
-    public MainAdapter(List<StationModel> busModels) {
-        this.busModels = busModels;
+    public MainAdapter(List<StationModel> stationList) {
+        this.stationList = stationList;
         notifyDataSetChanged();
     }
 
@@ -24,7 +24,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     public MainAdapter() {}
 
     public void setData(List<StationModel> busModels){
-        this.busModels = busModels;
+        this.stationList = busModels;
         notifyDataSetChanged();
     }
 
@@ -56,17 +56,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     @Override
     public void onBindViewHolder(final BaseViewHolder holder, final int position) {
 
-        StationModel model = busModels.get(position);
+        StationModel model = stationList.get(position);
         holder.tvTitle.setText(model.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        if (busModels == null) {
+        if (stationList == null) {
             return 0;
         }
 
-        return busModels.size();
+        return stationList.size();
     }
 
 }

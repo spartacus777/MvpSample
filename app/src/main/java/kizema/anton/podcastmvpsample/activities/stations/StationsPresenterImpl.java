@@ -1,25 +1,24 @@
-package kizema.anton.podcastmvpsample.podcast_act;
+package kizema.anton.podcastmvpsample.activities.stations;
 
 import java.util.List;
 
 import kizema.anton.podcastmvpsample.model.StationModel;
 
-public class PodcastPresenterImpl implements PodcastPrsenter {
+public class StationsPresenterImpl implements StationsPresenter {
 
-    private PodactView podactView;
+    private StationsView podactView;
 
-    private PodcastInteractor podcastInteractor;
+    private StationsInteractor stationsInteractor;
 
     private boolean loadDataIsInProgress = false;
     private boolean firstTime = true;
 
-
-    public PodcastPresenterImpl(PodcastInteractor podcastInteractor) {
-        this.podcastInteractor = podcastInteractor;
+    public StationsPresenterImpl(StationsInteractor stationsInteractor) {
+        this.stationsInteractor = stationsInteractor;
     }
 
     @Override
-    public void setView(PodactView podactView) {
+    public void setView(StationsView podactView) {
         this.podactView = podactView;
 
         loadFromDB();
@@ -31,26 +30,25 @@ public class PodcastPresenterImpl implements PodcastPrsenter {
     }
 
     @Override
-    public void removeView(PodactView podactView) {
+    public void removeView(StationsView podactView) {
         if (podactView == this.podactView){
             this.podactView = null;
         }
     }
 
-    public void loadFromDB(){
-        List<StationModel> list = podcastInteractor.loadDataFromDB();
+    private void loadFromDB(){
+        List<StationModel> list = stationsInteractor.loadDataFromDB();
         podactView.setData(list);
     }
 
-    @Override
-    public void load() {
+    private void load() {
 
         if (loadDataIsInProgress){
             return;
         }
 
         loadDataIsInProgress = true;
-        podcastInteractor.loadData(new PodcastInteractor.OnCompletion() {
+        stationsInteractor.loadData(new StationsInteractor.OnCompletion() {
             @Override
             public void onComplete(List<StationModel> list) {
                 podactView.setData(list);
@@ -59,6 +57,7 @@ public class PodcastPresenterImpl implements PodcastPrsenter {
 
             @Override
             public void onError() {
+                podactView.showError();
                 loadDataIsInProgress = false;
             }
         });

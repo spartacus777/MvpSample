@@ -1,6 +1,7 @@
 package kizema.anton.podcastmvpsample.model;
 
 
+import com.activeandroid.ActiveAndroid;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public class StationModelList {
 
     @SerializedName("items")
-    public List<StationModel> podcasts;
+    private List<StationModel> podcasts;
 
     public void setPodcasts(List<StationModel> podcasts) {
         this.podcasts = podcasts;
@@ -18,4 +19,16 @@ public class StationModelList {
         return podcasts;
     }
 
+    public void save(){
+        ActiveAndroid.beginTransaction();
+        try {
+            for (StationModel m : podcasts) {
+                m.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
+    }
 }
