@@ -101,6 +101,7 @@ public class ExampleUnitTest {
 
         StationsView view = new StationsView() {
 
+            private int counter = 0;
             private boolean first = true;
 
             @Override
@@ -115,6 +116,9 @@ public class ExampleUnitTest {
                     assertEquals(list.size(), 2);
                     assertTrue(list.get(0).getStationId() == 1);
                     assertTrue(list.get(1).getStationId() == 2);
+
+                    assertEquals(counter, 0);
+                    ++counter;
                 }
             }
 
