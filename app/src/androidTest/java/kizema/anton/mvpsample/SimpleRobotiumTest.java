@@ -6,15 +6,12 @@ import com.robotium.solo.Solo;
 
 import kizema.anton.mvpsample.activities.stations.StationsListActivity;
 
-/**
- * Created by somename on 22.09.2016.
- */
-public class SimpleActivityTest extends
+public class SimpleRobotiumTest extends
         ActivityInstrumentationTestCase2<StationsListActivity> {
 
     private Solo solo;
 
-    public SimpleActivityTest() {
+    public SimpleRobotiumTest() {
         super(StationsListActivity.class);
     }
 
