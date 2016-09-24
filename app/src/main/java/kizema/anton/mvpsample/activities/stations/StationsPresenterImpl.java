@@ -51,13 +51,17 @@ public class StationsPresenterImpl implements StationsPresenter {
         stationsInteractor.loadData(new StationsInteractor.OnCompletion() {
             @Override
             public void onComplete(List<StationModel> list) {
-                podactView.setData(list);
+                if (podactView != null) {
+                    podactView.setData(list);
+                }
                 loadDataIsInProgress = false;
             }
 
             @Override
             public void onError() {
-                podactView.showError();
+                if (podactView != null) {
+                    podactView.showError();
+                }
                 loadDataIsInProgress = false;
             }
         });

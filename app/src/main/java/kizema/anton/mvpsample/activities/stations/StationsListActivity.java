@@ -1,6 +1,7 @@
 package kizema.anton.mvpsample.activities.stations;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,8 @@ public class StationsListActivity extends AppCompatActivity implements StationsV
 
     private StationsPresenter stationsPresenter;
 
+    private RetainedFragment dataFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,20 +40,15 @@ public class StationsListActivity extends AppCompatActivity implements StationsV
         ButterKnife.bind(this);
 
         init();
-        initPresenter(savedInstanceState);
+        initPresenter();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
+        dataFragment.setData(stationsPresenter);
         stationsPresenter.removeView(this);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(PRESENTER_STR, stationsPresenter);
-        super.onSaveInstanceState(outState);
     }
 
     private void init() {
@@ -71,15 +69,21 @@ public class StationsListActivity extends AppCompatActivity implements StationsV
         });
     }
 
-    private void initPresenter(Bundle savedInstanceState){
-        if (savedInstanceState != null) {
-            stationsPresenter = (StationsPresenter) savedInstanceState.getSerializable(PRESENTER_STR);
-        }
+    private void initPresenter(){
 
-        if (stationsPresenter == null){
+        FragmentManager fm = getSupportFragmentManager();
+        dataFragment = (RetainedFragment) fm.findFragmentByTag(PRESENTER_STR);
+
+        if (dataFragment == null) {
+
+            dataFragment = new RetainedFragment();
+            fm.beginTransaction().add(dataFragment, PRESENTER_STR).commit();
+
             stationsPresenter = new StationsPresenterImpl(new StationsInteractorImpl());
+            dataFragment.setData(stationsPresenter);
         }
 
+        stationsPresenter = dataFragment.getData();
         stationsPresenter.setView(this);
     }
 
